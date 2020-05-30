@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Pet Details{% endblock %}
+
+{% block content %}
+
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h1>Pet Details</h1>
+          {% for message in get_flashed_messages() %}
+            <h4 class="text-success">{{ message }}</h4>
+          {% endfor %}  
+          <img src="{{ pet.photo }}" class="card-img-top">
+          <h5 class="card-title">Name: {{ pet.name }}</h5>
+          <h5 class="card-title">Species: {{ pet.species }}</h5>
+          {% if pet.age %}
+            <h5 class="card-title">Age: {{ pet.age }}</h5>
+          {% endif %}
+          <a href="/" class="btn btn-primary">Pet List</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h2>Edit Pet</h2>  
+          <form id="edit-pet-form" method="POST">
+              {{ form.hidden_tag() }}
+        
+              {% for field in form
+                 if field.widget.input_type != 'hidden' %}
+        
+                <p>
+                  {% if field.widget.input_type != 'checkbox' %}
+                    {{ field.label }}
+                    {{ field(class="form-control w-75 text-left") }} 
+                    
+                  {% else %}       
+                    {{ field(class="form-check-input ml-1")}}
+                    {{ field.label(class="form-check-label ml-4") }}
+                  {% endif %}
+        
+                  {% for error in field.errors %}
+                    {{ error }}
+                  {% endfor %}
+                </p>
+        
+              {% endfor %}
+            <button class="btn btn-success" type="submit">Save</button>
+          </form>   
+        </div>
+      </div>
+    </div>
+  </div>
+    
+{% endblock %}      
+      
+   

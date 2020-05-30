@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+  {% block title %}Pet list{% endblock %}
+
+  {% block content %}
+    
+    <div class="mt-4 ml-4">
+      <h1>Pet Adoption Agency</h1>
+      <h3>Available Pets</h3>
+      {% for message in get_flashed_messages() %}
+        <h4 class="text-success">{{ message }}</h4>
+      {% endfor %}
+      <div class="row">
+        {% for pet in pets %}
+          {% if pet.available %}
+            {% include "lists.html" %}
+                <a href="/{{ pet.id }}"><h5 class="card-title">{{ pet.name }}</a> <b>is available</b></h5>        
+              </div>   
+            </div>   
+          {% endif %}      
+        {% endfor %}         
+      </div>
+      <a href="/add" class="btn btn-primary">Add Pet</a>
+    </div>
+    <div class="mt-4 ml-4">
+      <h3>UnAvailable Pets</h3>
+      <div class="row">
+        {% for pet in pets %}
+          {% if not pet.available %}
+            {% include "lists.html" %}
+                <a href="/{{ pet.id }}"><h5 class="card-title">{{ pet.name }}</a> <b>is not available</b></h5>        
+              </div>
+            </div>   
+          {% endif %}
+        {% endfor %}         
+      </div>
+    </div>
+    
+  
+  {% endblock %}  

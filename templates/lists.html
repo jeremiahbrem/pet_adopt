@@ -1,0 +1,11 @@
+<!-- Consolidating code in pet_list.html -->
+<div class="card m-3" style="width: 18rem;">
+
+    {% if pet.photo %}
+      <img src="{{ pet.photo }}" class="card-img-top">
+    {% else %}
+      <img src="https://img.icons8.com/ultraviolet/40/000000/full-image.png" class="card-img-top w-50">
+    {% endif %}
+    <div class="card-body">
+
+        
